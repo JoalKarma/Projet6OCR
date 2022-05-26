@@ -12,9 +12,9 @@ exports.signup = (req, res, next) => {
         });
         user.save()
         .then(() => res.status(201).json({message: 'Utilisateur créé.'}))
-        .catch(error => res.status(400).json({error: error}));
+        .catch(error => res.status(400).json({error: "400 utilisateur non créer"}));
     })
-    .catch(error => res.status(500).json({error: error}));
+    .catch(error => res.status(500).json({error: "500"}));
 };
 
 exports.login = (req, res, next) => {
@@ -22,7 +22,7 @@ exports.login = (req, res, next) => {
     .then(user => {
         // return res.status(200).json(user);
         if(!user){
-            return res.status(401).json({error: error});
+            return res.status(401).json({error: "Utilisateur non trouvée!"});
         }
         bcrypt.compare(req.body.password, user.password)
         .then(valid => {
@@ -38,7 +38,7 @@ exports.login = (req, res, next) => {
                 )
             });
         })
-        .catch(error => res.status(500).json({error: "ok.1"}));
+        .catch(error => res.status(500).json({error: "500"}));
     })
-    .catch(error => res.status(500).json({error: "ok.2"}));
+    .catch(error => res.status(500).json({error: "500"}));
 };

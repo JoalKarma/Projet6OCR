@@ -15,6 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
+//création cookie
 
 //import routes
 const sauceRoute = require('./routes/sauce');

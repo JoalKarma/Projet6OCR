@@ -71,24 +71,26 @@ exports.like = (req, res, next) => {
 
   Sauce.findOne({_id: req.params.id})
     .then((sauce) => {
-      let usersLiked = sauce.usersLiked.find((id) => id === userId);
-      let usersDisliked = sauce.usersDisliked.find((id) => id === userId);
+      let userLike = sauce.usersLiked.find((id) => id === userId);
+      let userDislike = sauce.usersDisliked.find((id) => id === userId);
 
       switch(like){
-        case 0:
-          if(usersDisliked){
-            sauce.dislikes -= 1;
-            sauce.usersDisliked.filter(( id ) => id !== userId);
-          }
-          if(usersLiked){
-            sauce.likes -= 1;
-            sauce.usersLiked.filter(( id ) => id !== userId);
-          }
-          break;
         case 1:
           sauce.likes += 1;
           sauce.usersLiked.push(userId);
           break;
+        case 0:
+          if(userLike){
+            sauce.likes -= 1;
+            sauce.usersLiked = sauce.usersLiked.filter((id) => id !== userId);
+          }
+          if(userDislike){
+            sauce.dislikes -= 1;
+            sauce.usersDisliked = sauce.usersDisliked.filter((id) => id !== userId);
+          }
+          
+          break;
+        
         case -1:
           sauce.dislikes += 1;
           sauce.usersDisliked.push(userId);

@@ -27,7 +27,7 @@ const path = require('path');
 //mongodb
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://CourMongo:Courmongopassdejo12@cluster0.lut8m.mongodb.net/Cluster0?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://" + process.env.MongooseUser + ":" + process.env.MongoosePassword + "@cluster0.lut8m.mongodb.net/Cluster0?retryWrites=true&w=majority",
   {   
     useNewUrlParser: true,
     useUnifiedTopology: true
